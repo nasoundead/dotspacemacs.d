@@ -40,15 +40,15 @@ values."
      (auto-completion: variables auto-completion-enable-sort-by-usage t)
      better-defaults
      emacs-lisp
-     ;; git
-     ;; markdown
+     git
+     markdown
      org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      (syntax-checking :variables syntax-checking-enable-by-default nil)
      (spell-checking :variables spell-checking-enable-by-default nil)
-     ;; version-control
+     themes-megapack
      graphviz
      (python :variables
              python-test-runner '(nose pytest))
@@ -132,7 +132,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light solarized-dark)
+   dotspacemacs-themes '(ujelly solarized-light solarized-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -321,9 +321,11 @@ you should place your code here."
       (set-fontset-font (frame-parameter nil 'font)
                         charset
                         (font-spec :family "Microsoft Yahei" :size 14))))
-
+  (setq powerline-default-separator 'nil)
   (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
   (load custom-file 'no-error 'no-message)
+  (define-key evil-normal-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
+  (define-key evil-normal-state-map (kbd ",cc") 'evilnc-copy-and-comment-lines)
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
