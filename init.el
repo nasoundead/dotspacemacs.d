@@ -296,9 +296,15 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq configuration-layer--elpa-archives
-        '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
-          ("org-cn"   . "https://elpa.zilongshanren.com/org/")
-          ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
+	'(("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+		("org-cn" . "http://elpa.zilongshanren.com/org/")
+		("gnu-cn" . "http://elpa.zilongshanren.com/gnu/")))
+	(setq url-proxy-services '(("http" . "127.0.0.1:3128")
+		("https" . "127.0.0.1:3128")))
+	(setq url-http-proxy-basic-auth-storage
+		(list (list "127.0.0.1:3128"
+		(cons "Input your LDAP UID !"
+		(base64-encode-string "w00220012:naso#006")))))
 
   )
 
@@ -331,3 +337,17 @@ you should place your code here."
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stekene-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme moe-theme mmm-mode minimal-theme material-theme markdown-mode majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme helm-gitignore helm-company hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme with-editor espresso-theme dracula-theme django-theme darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme company-statistics company-anaconda company colorsarenice-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme yasnippet apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme ac-ispell auto-complete molokai-theme yapfify ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline solarized-theme rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs request rbenv rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort projectile-rails popwin pip-requirements persp-mode paradox pangu-spacing org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree mwim move-text macrostep lorem-ipsum live-py-mode linum-relative link-hint info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag graphviz-dot-mode google-translate golden-ratio gnuplot flyspell-correct-helm flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu enh-ruby-mode elisp-slime-nav dumb-jump define-word cython-mode column-enforce-mode clean-aindent-mode chruby chinese-pyim bundler auto-highlight-symbol auto-dictionary auto-compile anaconda-mode aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
