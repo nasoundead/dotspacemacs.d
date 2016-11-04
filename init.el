@@ -46,15 +46,15 @@ values."
      better-defaults
      emacs-lisp
      git
-     markdown
+     ;; markdown
      org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      (syntax-checking :variables syntax-checking-enable-by-default nil)
      (spell-checking :variables spell-checking-enable-by-default nil)
-     themes-megapack
-     graphviz
+     ;; themes-megapack
+     ;; graphviz
      python
      ruby
      )
@@ -134,13 +134,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(molokai)
+   dotspacemacs-themes '(leuven sanityinc-solarized-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+   dotspacemacs-default-font '("Fira Mono"
+                               :size 15
                                :weight normal
                                :width normal
                                :powerline-scale 1.2)
@@ -254,7 +254,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers t 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -322,7 +322,7 @@ you should place your code here."
   ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
-      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
+      (spacemacs//set-monospaced-font "PragmataPro" "Hiragino Sans GB" 15 16)))
 
   ;; Setting Chinese Font
   (when (and (spacemacs/system-is-mswindows) window-system)
