@@ -134,7 +134,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(molokai)
+   dotspacemacs-themes '(spacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -310,24 +310,38 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;;解决org表格里面中英文对齐的问题
-  (when (configuration-layer/layer-usedp 'chinese)
-    (when (and (spacemacs/system-is-mac) window-system)
-      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
+  ; (when (configuration-layer/layer-usedp 'chinese)
+    ; (when (and (spacemacs/system-is-mac) window-system)
+      ; (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
 
   ;; Setting Chinese Font
-  (when (and (spacemacs/system-is-mswindows) window-system)
-    (setq ispell-program-name "aspell")
-    (setq w32-pass-alt-to-system nil)
-    (setq w32-apps-modifier 'super)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font)
-                        charset
-                        (font-spec :family "Microsoft Yahei" :size 14))))
-  (setq powerline-default-separator 'wave)
-  (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
-  (load custom-file 'no-error 'no-message)
+  ; (when (and (spacemacs/system-is-mswindows) window-system)
+    ; (setq ispell-program-name "aspell")
+    ; (setq w32-pass-alt-to-system nil)
+    ; (setq w32-apps-modifier 'super)
+    ; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      ; (set-fontset-font (frame-parameter nil 'font)
+                        ; charset
+                        ; (font-spec :family "Microsoft Yahei" :size 14))))
+  ; (setq powerline-default-separator 'wave)
+  ; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+  ; (load custom-file 'no-error 'no-message)
   (define-key evil-normal-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
   (define-key evil-normal-state-map (kbd ",cc") 'evilnc-copy-and-comment-lines)
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag flyspell-correct-helm ace-jump-helm-line evil-unimpaired f s dash))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
