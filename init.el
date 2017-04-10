@@ -134,16 +134,16 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark)
+   dotspacemacs-themes '(zenburn)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 16
                                :weight normal
                                :width normal
-                               :powerline-scale 1.2)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -315,14 +315,14 @@ you should place your code here."
       ; (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
 
   ;; Setting Chinese Font
-  ; (when (and (spacemacs/system-is-mswindows) window-system)
-    ; (setq ispell-program-name "aspell")
-    ; (setq w32-pass-alt-to-system nil)
-    ; (setq w32-apps-modifier 'super)
-    ; (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      ; (set-fontset-font (frame-parameter nil 'font)
-                        ; charset
-                        ; (font-spec :family "Microsoft Yahei" :size 14))))
+  (when (and (spacemacs/system-is-mswindows) window-system)
+    (setq ispell-program-name "aspell")
+    (setq w32-pass-alt-to-system nil)
+    (setq w32-apps-modifier 'super)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset
+                        (font-spec :family "Microsoft Yahei" :size 16))))
   ; (setq powerline-default-separator 'wave)
   ; (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
   ; (load custom-file 'no-error 'no-message)
