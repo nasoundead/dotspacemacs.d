@@ -75,6 +75,7 @@ values."
      (chinese :packages youdao-dictionary fcitx
               :variables chinese-enable-fcitx nil
               chinese-enable-youdao-dict t)
+     ;; themes-megapack
      )
 
    ;; List of additional packages that will be installed without being
@@ -140,7 +141,9 @@ values."
    ;; List of items to show in startup buffer or an association list of
    ;; the form (list-type . list-size). If nil then it is disabled.
    ;; Possible values for list-type are:
-   ;; recents'bookmarks' projects'agenda' todos'." ;; List sizes may be nil, in which case ;;spacemacs-buffer-startup-lists-length' takes effect.
+   ;; recents'bookmarks' projects'agenda' todos'."
+   ;; List sizes may be nil, in which case
+   ;; spacemacs-buffer-startup-lists-length' takes effect.
    dotspacemacs-startup-lists '((recents . 5)
                                 (projects . 7))
    ;; True if the home buffer should respond to resize events.
@@ -150,8 +153,10 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(hc-zenburn spacemacs-dark spacemacs-light)
-   ;; If non nil the cursor color matches the state color in GUI Emacs. dotspacemacs-colorize-cursor-according-to-state t ;; Default font, or prioritized list of fonts.powerline-scale' allows to
+   dotspacemacs-themes '( leuven spacemacs-dark spacemacs-light )
+   ;; If non nil the cursor color matches the state color in GUI Emacs.
+   dotspacemacs-colorize-cursor-according-to-state t
+   ;; Default font, or prioritized list of fonts.powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
                                :size 14
@@ -204,13 +209,20 @@ values."
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
    dotspacemacs-large-file-size 1
-   ;; Location where to auto-save files. Possible values are original' to ;; auto-save the file in-place,cache' to auto-save the file to another
-   ;; file stored in the cache directory and nil' to disable auto-saving. ;; (default 'cache) dotspacemacs-auto-save-file-location 'cache ;; Maximum number of rollback slots to keep in the cache. (default 5) dotspacemacs-max-rollback-slots 5 ;; If non nil,helm' will try to minimize the space it uses. (default nil)
+   ;; Location where to auto-save files. Possible values are original' to
+   ;; auto-save the file in-place,cache' to auto-save the file to another
+   ;; file stored in the cache directory and nil' to disable auto-saving.
+   ;; (default 'cache)
+   dotspacemacs-auto-save-file-location 'cache
+   ;; Maximum number of rollback slots to keep in the cache. (default 5)
+   dotspacemacs-max-rollback-slots 5
+   ;; If non nil,helm' will try to minimize the space it uses. (default nil)
    dotspacemacs-helm-resize nil
    ;; if non nil, the helm header is hidden when there is only one source.
    ;; (default nil)
    dotspacemacs-helm-no-header nil
-   ;; define the position to display helm', options arebottom', top', ;;left', or right'. (default 'bottom)
+   ;; define the position to display helm', options arebottom', top',
+   ;;left', or right'. (default 'bottom)
    dotspacemacs-helm-position 'bottom
    ;; Controls fuzzy matching in helm. If set toalways', force fuzzy matching
    ;; in all non-asynchronous sources. If set to source', preserve individual
@@ -268,7 +280,8 @@ values."
    ;;text-mode' derivatives. If set to relative', line numbers are relative.
    ;; This variable can also be set to a property list for finer control:
    ;; '(:relative nil
-   ;; :disabled-for-modes dired-mode ;; doc-view-mode
+   ;; :disabled-for-modes dired-mode
+   ;; doc-view-mode
    ;; markdown-mode
    ;; org-mode
    ;; pdf-view-mode
@@ -278,7 +291,7 @@ values."
    dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are evil' and origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'origami
+   dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -313,11 +326,14 @@ values."
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after dotspacemacs/init', before layer configuration executes. This function is mostly useful for variables that need to be set before packages are loaded. If you are unsure, you should try in setting them indotspacemacs/user-config' first."
-  (setq configuration-layer--elpa-archives
-        '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
-          ("org-cn"   . "https://elpa.emacs-china.org/org/")
-          ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
+  ;; (setq configuration-layer--elpa-archives
+  ;;       '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
+  ;;         ("org-cn"   . "https://elpa.emacs-china.org/org/")
+  ;;         ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
 
+  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+                           ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+  (package-initialize)
   ;; (setq url-proxy-services '(("no_proxy". "127.0.0.1")
   ;;                            ("http" . "127.0.0.1:3128")
   ;;                            ("https" . "127.0.0.1:3128")))
@@ -325,26 +341,7 @@ It is called immediately after dotspacemacs/init', before layer configuration ex
   ;;       (list (list "127.0.0.1:3128"
   ;;                   (cons "Input your LDAP UID !"
   ;;                         (base64-encode-string "w00220012:huaweier@1")))))
-  (defconst os:windowsp (eq system-type 'windows-nt)
-    "if current operation system is windows system")
-  (defconst os:linuxp (eq system-type 'gnu/linux)
-    "if current operation system is linux")
-  (defconst os:win32p (and os:windowsp
-                           (not (getenv "PROGRAMW6432")))
-    "if current operation system is windows 32bit version")
-  (defconst os:win64p (and os:windowsp
-                           (getenv "PROGRAMW6432"))
-    "if current operation system is windows 64bit verison.")
-  (when os:windowsp
-    (mapc (lambda (path) (add-to-list 'load-path path))
-          (reverse
-           (list
-            (if os:win64p
-                "C:/Program Files (x86)/Git/bin"
-              "C:/Program Files/Git/bin")
-            "/forwin/dll"
-            "/forwin/bin"
-            ))))
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -392,6 +389,39 @@ you should place your code here."
                                 (old-default-directory default-directory))
                             (projectile-switch-project-by-name project)
                             (setq default-directory old-default-directory))))))
+
+
+  (defconst os:windowsp (eq system-type 'windows-nt)
+    "if current operation system is windows system")
+  (defconst os:linuxp (eq system-type 'gnu/linux)
+    "if current operation system is linux")
+  (defconst os:win32p (and os:windowsp
+                           (not (getenv "PROGRAMW6432")))
+    "if current operation system is windows 32bit version")
+  (defconst os:win64p (and os:windowsp
+                           (getenv "PROGRAMW6432"))
+    "if current operation system is windows 64bit verison.")
+
+  (defun prepend-to-exec-path (path)
+    "prepend the path to the emacs intenral `exec-path' and \"PATH\" env variable.
+Return the updated `exec-path'"
+    (setenv "PATH" (concat (expand-file-name path)
+                           path-separator
+                           (getenv "PATH")))
+    (setq exec-path
+          (cons (expand-file-name path)
+                exec-path)))
+
+  (when os:windowsp
+    (mapc #'prepend-to-exec-path
+          (reverse
+           (list
+            (if os:win64p
+                "C:/Program Files (x86)/Git/bin"
+              "C:/Program Files/Git/bin")
+            "~/forwin/dll"
+            "~/forwin/bin"
+            ))))
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
