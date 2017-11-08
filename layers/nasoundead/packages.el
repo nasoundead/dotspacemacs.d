@@ -29,9 +29,8 @@
 
 ;;; Code:
 
-(defconst nasoundead-packages
-  '(dired+)
-  "The list of Lisp packages required by the nasoundead layer.
+
+"The list of Lisp packages required by the nasoundead layer.
 
 Each entry is either:
 
@@ -56,8 +55,15 @@ Each entry is either:
         `./local/PACKAGE/PACKAGE.el'
 
       - A list beginning with the symbol `recipe' is a melpa
-        recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
-(defun nasoundead/pre-init-dired+
+        recipe.  See: https://github.com/milkypostman/melpa#recipe-format"
+
+(defconst nasoundead-packages
+  '(
+    ;; dired+
+    )
+
+)
+(defun nasoundead/init-dired+ ()
     (use-package dired+
       :init
       (setq diredp-hide-details-initially-flag nil)

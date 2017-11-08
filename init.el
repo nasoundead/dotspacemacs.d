@@ -64,6 +64,7 @@ values."
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil)
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     (vinegar :variables vinegar-reuse-dired-buffer t)
      emacs-lisp
      git
      markdown
@@ -83,7 +84,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(ag)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -374,55 +375,10 @@ you should place your code here."
   (spacemacs|diminish which-key-mode)
   (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
   (spacemacs|diminish counsel-mode)
-  
-  ;; https://github.com/syl20bnr/spacemacs/issues/7749
-  (defun spacemacs/ivy-persp-switch-project (arg)
-    (interactive "P")
-    (ivy-read "Switch to Project Perspective: "
-              (if (projectile-project-p)
-                  (cons (abbreviate-file-name (projectile-project-root))
-                        (projectile-relevant-known-projects))
-                projectile-known-projects)
-              :action (lambda (project)
-                        (let ((persp-reset-windows-on-nil-window-conf t))
-                          (persp-switch project)
-                          (let ((projectile-completion-system 'ivy)
-                                (old-default-directory default-directory))
-                            (projectile-switch-project-by-name project)
-                            (setq default-directory old-default-directory))))))
 
 
-  (defconst os:windowsp (eq system-type 'windows-nt)
-    "if current operation system is windows system")
-  (defconst os:linuxp (eq system-type 'gnu/linux)
-    "if current operation system is linux")
-  (defconst os:win32p (and os:windowsp
-                           (not (getenv "PROGRAMW6432")))
-    "if current operation system is windows 32bit version")
-  (defconst os:win64p (and os:windowsp
-                           (getenv "PROGRAMW6432"))
-    "if current operation system is windows 64bit verison.")
-
-  (defun prepend-to-exec-path (path)
-    "prepend the path to the emacs intenral `exec-path' and \"PATH\" env variable.
-Return the updated `exec-path'"
-    (setenv "PATH" (concat (expand-file-name path)
-                           path-separator
-                           (getenv "PATH")))
-    (setq exec-path
-          (cons (expand-file-name path)
-                exec-path)))
-
-  (when os:windowsp
-    (mapc #'prepend-to-exec-path
-          (reverse
-           (list
-            (if os:win64p
-                "C:/Program Files (x86)/Git/bin"
-              "C:/Program Files/Git/bin")
-            "~/forwin/dll"
-            "~/forwin/bin"
-            ))))
+  (unless (server-running-p)
+    (server-start))
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
