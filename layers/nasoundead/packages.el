@@ -59,6 +59,7 @@ Each entry is either:
 
 (defconst nasoundead-packages
   '(
+    ztree
     ;; dired+
     )
 
@@ -70,5 +71,8 @@ Each entry is either:
       :config
       (diredp-toggle-find-file-reuse-dir 1))
     )
+(defun nasoundead/init-ztree()
+  (use-package ztree
+    ))
 
 ;;; packages.el ends here
